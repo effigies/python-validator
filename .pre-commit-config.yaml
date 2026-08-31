@@ -22,3 +22,14 @@ repos:
     rev: 57b21406f092110c18776e39b0bda50d37c945c8  # frozen: v2.4.3
     hooks:
       - id: codespell
+  - repo: local
+    hooks:
+      - id: typecheck
+        name: Typecheck
+        language: python
+        entry: >-
+          uv run --active --no-dev
+            --group=test --group=types --extra cli
+            mypy src tests
+        pass_filenames: false
+        additional_dependencies: [uv]
